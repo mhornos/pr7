@@ -22,7 +22,7 @@ return new class extends Migration
             $table->dateTime('expiracio_token')->nullable();
             $table->string('remember_token', 255)->nullable();
             $table->dateTime('remember_token_expiracio')->nullable();
-            $table->timestamps();
+            $table->timestamps();//
         });
     }
 
