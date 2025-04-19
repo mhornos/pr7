@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\VehicleController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -15,5 +18,12 @@ Route::post('/register', [AuthController::class, 'procesarRegister'])->name('reg
 
 Route::get('/', [ArticleController::class, 'index'])->name('home');
 
+Route::get('/perfil/editar', [PerfilController::class, 'editar'])->name('perfil.editar');
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/canviar-password', [PasswordController::class, 'mostrarFormulari'])->name('password.cambiar');
+
+Route::get('/vehicle/inserir', [VehicleController::class, 'formulari'])->name('vehicle.inserir');
 
 
