@@ -25,5 +25,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/canviar-password', [PasswordController::class, 'mostrarFormulari'])->name('password.cambiar');
 
 Route::get('/vehicle/inserir', [VehicleController::class, 'formulari'])->name('vehicle.inserir');
+Route::get('/vehicle/modificar', [VehicleController::class, 'formulariModificar'])->name('vehicle.modificar');
+Route::get('/vehicle/esborrar', [VehicleController::class, 'formulariEsborrar'])->name('vehicle.esborrar');
+
+
 
 

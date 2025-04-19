@@ -53,7 +53,6 @@
     </div>
     
     <!-- paginacio -->
-
     {{ $articles->links('vendor.pagination.default') }}
     <br>
 
@@ -80,6 +79,13 @@
         @endforelse
     </div>
     
+    <!-- salutacio al usuari -->
+    @if (obtenirCookie('salutacio') && session()->has('usuari'))
+    <div class="salutacio">
+        Benvingut, {{ session('usuari') }}! 👋
+    </div>
+    @endif
+
 </body>
 </html>
 

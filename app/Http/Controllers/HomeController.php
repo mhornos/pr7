@@ -14,9 +14,10 @@ class HomeController extends Controller
         if (!Usuari::where('nombreUsuario', 'admin')->exists()) {
             Usuari::create([
                 'nombreUsuario' => 'admin',
-                'contrasenya' => bcrypt('admin123'),
+                'contrasenya' => bcrypt('Admin1234_'),
                 'correo' => 'admin@admin.com',
                 'ciutat' => 'Barcelona',
+                'imatge' => ''
             ]);
         }
 

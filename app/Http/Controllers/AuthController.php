@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usuari;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 class AuthController extends Controller
 {   
-    //includes
     public function mostrarLogin(){
         return view('auth.login');
     }   
@@ -17,6 +18,67 @@ class AuthController extends Controller
         return view('auth.register');
     }
     
+    //iniciar sessio
+    public function procesarLogin(Request $request)
+    {
+        $usuari = $request->input('usuari');
+        $contrasenya = $request->input('contrasenya');
+        $rememberMe = $request->has('remember_me');
+        $recaptcha = $request->input('g-recaptcha-response');
+
+        $errors = [];
+
+        if (empty($usuari)) {
+            $errors[] = "falta el nom d'usuari ❌";
+        }
+
+        if (empty($contrasenya)) {
+            $errors[] = "falta la contrasenya ❌";
+        }
+
+        //si no omplim el recaptcha salta error
+        if (Session::get('intentsFallats', 0) >= 3 && empty($recaptcha)) {
+            $errors[] = "has de completar el reCAPTCHA ❌";
+        }
+
+        //si no hi ha errors, validem el captcha
+        if (empty($errors) && Session::get('intentsFallats', 0) >= 3) {
+            $clauSecreta = env('RECAPTCHA_SECRET');
+            $resposta = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$clauSecreta&response=$recaptcha");
+            $respostaClau = json_decode($resposta, true);
+
+            if ($respostaClau["success"] != 1) {
+                $errors[] = "el reCAPTCHA no es vàlid❌";
+            }
+        }
+
+        // si no hi ha errors intentem iniciar sessió
+        if (empty($errors)) {
+            $usuariDades = Usuari::where('nombreUsuario', $usuari)->first();
+
+            if ($usuariDades && password_verify($contrasenya, $usuariDades->contrasenya)) {
+                Session::put('usuari', $usuari);
+                crearCookie("salutacio", $usuari);
+
+                if ($rememberMe) {
+                    crearCookie("usuari", $usuari);
+                    crearCookie("contrasenya", $contrasenya);
+                } else {
+                    eliminarCookie("usuari");
+                    eliminarCookie("contrasenya");
+                }
+
+                Session::put('intentsFallats', 0);
+                return redirect()->route('home');
+            } else {
+                $errors[] = "usuari o contrasenya incorrectes❌";
+                Session::put('intentsFallats', Session::get('intentsFallats', 0) + 1);
+            }
+        }
+
+        return back()->withErrors($errors)->withInput();
+    }
+
     //crear compte
     public function procesarRegister(Request $request){
         //validar les dades del formulari

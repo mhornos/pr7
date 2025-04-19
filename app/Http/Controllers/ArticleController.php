@@ -11,13 +11,21 @@ class ArticleController extends Controller
     {
         $query = Article::query();
 
-        //filtres
+        //filtrar nomes pels articles del usuari loguejat
+        if (session()->has('usuari')) {
+            $query->where('nom_usuari', session('usuari'));
+    }
+
+        //filtres de cerca
         if ($request->filled('cercaCriteri')) {
             $criteri = $request->input('cercaCriteri');
             $query->where(function ($q) use ($criteri) {
                 $q->where('marca', 'like', "%$criteri%")
                   ->orWhere('model', 'like', "%$criteri%")
-                  ->orWhere('matricula', 'like', "%$criteri%");
+                  ->orWhere('matricula', 'like', "%$criteri%")
+                  ->orWhere('color', 'like', "%$criteri%")
+                  ->orWhere('any', 'like', "%$criteri%")
+                  ->orWhere('nom_usuari', 'like', "%$criteri%");
             });
         }
 
