@@ -1,4 +1,3 @@
-<!-- Miguel Angel Hornos -->
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -7,6 +7,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\RestartPasswordController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -28,6 +30,10 @@ Route::get('/vehicle/inserir', [VehicleController::class, 'formulari'])->name('v
 Route::get('/vehicle/modificar', [VehicleController::class, 'formulariModificar'])->name('vehicle.modificar');
 Route::get('/vehicle/esborrar', [VehicleController::class, 'formulariEsborrar'])->name('vehicle.esborrar');
 
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForm'])->name('password.cambiar');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'enviarCorreu'])->name('password.send');
 
+Route::get('/restart-password/{token}', [RestartPasswordController::class, 'showForm'])->name('password.restart');
+Route::post('/restart-password/{token}', [RestartPasswordController::class, 'processar'])->name('password.restart.process');
 
 

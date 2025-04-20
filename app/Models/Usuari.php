@@ -12,6 +12,10 @@ class Usuari extends Authenticatable
 
     protected $table = 'usuaris';
 
+    //especifico la clau primaria perque la default que espera 
+    //laravel es "id" i no "ID" i em dona error a l'hora de fer us del token de recuperació
+    protected $primaryKey = 'ID';
+
     //atributs de la taula
     protected $fillable = [
         'nombreUsuario',
@@ -29,6 +33,7 @@ class Usuari extends Authenticatable
     protected $hidden = [
         'contrasenya',
         'remember_token',
+        'token',
     ];
 
     //atributs que han de ser convertits a un altre tipus
