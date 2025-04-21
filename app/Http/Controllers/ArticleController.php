@@ -14,7 +14,7 @@ class ArticleController extends Controller
         //filtrar nomes pels articles del usuari loguejat
         if (session()->has('usuari')) {
             $query->where('nom_usuari', session('usuari'));
-    }
+        }
 
         //filtres de cerca
         if ($request->filled('cercaCriteri')) {

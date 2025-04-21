@@ -66,7 +66,7 @@
                 <p><strong>Color:</strong> {{ $article->color }}</p>
                 <p><strong>Matrícula:</strong> {{ $article->matricula }}</p>
                 <p><strong>Mecànic:</strong> {{ $article->nom_usuari }}</p>
-                <p><strong>Ciutat:</strong> {{ $article->ciutat }}</p>
+                <p><strong>Ciutat:</strong> {{ $article->usuari->ciutat}}</p>
 
                 @if (!empty($article->imatge))
                     <img src="{{ $article->imatge }}" width="150" alt="imatge">

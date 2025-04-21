@@ -1,13 +1,13 @@
 @if ($paginator->hasPages())
     <div class="paginacio">
-        {{-- Botón anterior --}}
+        <!-- boto anterior -->
         @if ($paginator->onFirstPage())
-            {{-- Desactivado --}}
+            <!-- desactivat -->
         @else
             <a href="{{ $paginator->previousPageUrl() }}">Anterior</a>
         @endif
 
-        {{-- Enlaces de página --}}
+        <!-- enllaços de pagina -->
         @for ($i = 1; $i <= $paginator->lastPage(); $i++)
             @if ($i == $paginator->currentPage())
                 <strong>{{ $i }}</strong>
@@ -16,7 +16,7 @@
             @endif
         @endfor
 
-        {{-- Botón siguiente --}}
+        <!-- boto següent -->
         @if ($paginator->hasMorePages())
             <a href="{{ $paginator->nextPageUrl() }}">Següent</a>
         @endif

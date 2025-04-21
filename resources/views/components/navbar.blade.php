@@ -17,7 +17,7 @@
 
         <a href="{{ route('perfil.editar') }}"><button>Editar perfil</button></a>
         <a href="{{ route('logout') }}"><button>Deslogar-se</button></a>
-        <a href="{{ route('password.cambiar') }}"><button>Canviar password</button></a>
+        <a href="{{ route('password.form') }}"><button>Canviar password</button></a>
 
         <!-- mostrar només si l'usuari és "admin" -->
         @if(session('usuari') === 'admin')
