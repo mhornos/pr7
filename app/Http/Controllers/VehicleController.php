@@ -107,6 +107,34 @@ class VehicleController extends Controller
         return view('vehicle.esborrar', compact('articles'));
     }
 
+    //esborrar vehicle
+    public function esborrar(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|numeric',
+        ], [
+            'id.required' => "falta l'ID ❌",
+        ]);
+    
+        $usuari = session('usuari');
+        $id = $request->input('id');
+    
+        $article = Article::find($id);
+    
+        if (!$article) {
+            return back()->withErrors(["no s'ha trobat cap article amb aquest ID ❌"]);
+        }
+    
+        if ($article->nom_usuari !== $usuari) {
+            return back()->withErrors(["no tens permís per eliminar aquest article ❌"]);
+        }
+    
+        $article->delete();
+    
+        return back()->with('success', "article amb ID $id eliminat correctament ✅");
+    }
+    
+
     //obtenir llista d'articles per tornar-la a mostrar-la sota cada formulari
     private function obtenirArticlesFiltrats(Request $request){
         $query = Article::with('usuari');
@@ -120,12 +148,12 @@ class VehicleController extends Controller
             });
         }
 
-        //filtro por usuari logat
+        //filtro per usuari logat
         if (session('usuari')) {
             $query->where('nom_usuari', session('usuari'));
         }
 
-        //ordenaci
+        //ordenacio
         $orden = $request->input('orden');
         switch ($orden) {
             case 'any_desc': $query->orderBy('any', 'desc'); break;

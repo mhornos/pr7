@@ -14,9 +14,10 @@ class UsuarisSeeder extends Seeder
     public function run(): void
     {
         DB::table('usuaris')->insert([
-            ['nombreUsuario' => 'Miguel', 'contrasenya' => 'Contrasena1234_', 'correo' => 'miguel@gmail.com', 'ciutat' => 'Barcelona'],
-            ['nombreUsuario' => 'Frank', 'contrasenya' => 'Contrasena1234_', 'correo' => 'frank@gmail.com', 'ciutat' => 'Madrid'],
-            ['nombreUsuario' => 'Hector', 'contrasenya' => 'Contrasena1234_', 'correo' => 'hector@gmail.com', 'ciutat' => 'Lloret'],
+            ['nombreUsuario' => 'Miguel', 'contrasenya' => bcrypt('Contrasena1234_'), 'correo' => 'miguel@gmail.com', 'ciutat' => 'Barcelona'],
+            ['nombreUsuario' => 'Frank', 'contrasenya' => bcrypt('Contrasena1234_'), 'correo' => 'frank@gmail.com', 'ciutat' => 'Madrid'],
+            ['nombreUsuario' => 'Hector', 'contrasenya' => bcrypt('Contrasena1234_'), 'correo' => 'hector@gmail.com', 'ciutat' => 'Lloret'],
+            ['nombreUsuario' => 'admin', 'contrasenya' => bcrypt('Admin1234_'), 'correo' => 'admin@admin.com', 'ciutat' => 'Barcelona'],
         ]);
         
     }

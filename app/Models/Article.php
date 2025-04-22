@@ -8,6 +8,10 @@ class Article extends Model
 {
     protected $table = 'article';
 
+    //especifico la clau primaria perque la default que espera 
+    //laravel es "id" i no "ID" i em dona error a l'hora de fer us del token de recuperació
+    protected $primaryKey = 'ID';
+
     protected $fillable = [
         'marca', 
         'model', 

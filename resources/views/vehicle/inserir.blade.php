@@ -33,10 +33,10 @@
         </table>
     </form>
 
-    <br>
+    
     <a href="{{ route('home', ['pagina' => request('pagina', 1)]) }}">
         <button>Tornar a inici</button>
-    </a><br>
+    </a>
 
     <!-- paginacio -->
         {{ $articles->links('vendor.pagination.default') }}
