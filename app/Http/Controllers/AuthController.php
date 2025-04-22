@@ -37,8 +37,9 @@ class AuthController extends Controller
         }
 
         //si no omplim el recaptcha salta error
-        if (Session::get('intentsFallats', 0) >= 3 && empty($recaptcha)) {
-            $errors[] = "has de completar el reCAPTCHA ❌";
+        if (!empty($errors)) {
+            Session::put('intentsFallats', Session::get('intentsFallats', 0) + 1);
+            return back()->withErrors($errors)->withInput();
         }
 
         //si no hi ha errors, validem el captcha

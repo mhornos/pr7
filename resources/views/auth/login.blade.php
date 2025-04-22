@@ -27,7 +27,7 @@
 
         <!-- si l'usuari ha fallat 3 vegades, mostrar reCAPTCHA -->
         @if(session('intentsFallats', 0) >= 3)
-            <div class="g-recaptcha" data-sitekey="6LeX8Y0qAAAAAN_VXumrgWfMGgoTqfD5XvZ4NZp0"></div>
+            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
         @endif
         <br>
 

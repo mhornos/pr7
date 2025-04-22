@@ -41,12 +41,12 @@ class ForgotPasswordController extends Controller
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'm.hornos@sapalomera.cat';
+            $mail->Username = env('MAIL_USERNAME');
             $mail->Password = env('MAIL_PASSWORD');
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            $mail->setFrom('m.hornos@sapalomera.cat', 'Recuperació de password');
+            $mail->setFrom(env('MAIL_USERNAME'), 'Recuperació de password');
             $mail->addAddress($request->correu);
 
             $reset_link = route('password.restart', ['token' => $token]);
