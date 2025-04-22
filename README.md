@@ -1,3 +1,31 @@
+## ✅ He migrat correctament tota la part de UF1 i UF2.
+
+### Clona el repositori:
+```bash
+git clone https://github.com/mhornos/pr7.git
+cd pr7
+```
+    
+### Instala dependències:
+```bash
+composer install
+```
+
+### env:
+   - Renombra el fitxer "```.env.example```" a "```.env```"
+   - Configura la **BD**, el **PHPMailer** i **Google Recaptcha**
+
+### Migracions i seeders:
+```bash
+php artisan migrate --seed
+```
+
+### Credencials admin: 
+- Usuari: "`admin`"
+- Password: "`Admin1234_`"
+    
+-----
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
